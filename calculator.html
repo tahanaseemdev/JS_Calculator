@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="icon" href="title.png">
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        cursor: url(cursor.png), auto;
+        font-family: 'Montserrat', sans-serif;
+        background-color: #08AEEA;
+        background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card {
+        height: 80%;
+        width: 30%;
+        box-shadow: 0 0 10px 0 black;
+    }
+
+    .row1 {
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    .row2 {
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    .row3 {
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    .row4 {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    button {
+        height: 120px;
+        width: 150px;
+        font-size: 25px;
+        cursor: url(cursor.png), auto;
+    }
+
+    input {
+        height: 120px;
+        width: 454px;
+        font-size: 25px;
+        cursor: url(cursor.png), auto;
+    }
+</style>
+
+<body>
+    <div class="card">
+        <div class="output">
+            <input type="text" id="output" readonly>
+        </div>
+        <div class="buttons">
+            <div class="row1">
+                <button onclick="addtooutput('7')">7</button>
+                <button onclick="addtooutput('8')">8</button>
+                <button onclick="addtooutput('9')">9</button>
+                <button onclick="addtooutput('÷')">÷</button>
+            </div>
+            <div class="row2">
+                <button onclick="addtooutput('4')">4</button>
+                <button onclick="addtooutput('5')">5</button>
+                <button onclick="addtooutput('6')">6</button>
+                <button onclick="addtooutput('x')">x</button>
+            </div>
+            <div class="row3">
+                <button onclick="addtooutput('1')">1</button>
+                <button onclick="addtooutput('2')">2</button>
+                <button onclick="addtooutput('3')">3</button>
+                <button onclick="addtooutput('+')">+</button>
+            </div>
+            <div class="row4">
+                <button onclick="addtooutput('0')">0</button>
+                <button onclick="clearoutput()">C</button>
+                <button onclick="calculate()">=</button>
+                <button onclick="addtooutput('-')">-</button>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        const output = document.getElementById('output');
+        function addtooutput(value) {
+            output.value += value;
+        }
+        function clearoutput() {
+            output.value = '';
+        }
+        function calculate() {
+            const expression = output.value;
+            let result;
+            if (expression.includes('+')) {
+                const [num1, num2] = expression.split('+').map(parseFloat);
+                result = num1 + num2;
+            }
+            else if (expression.includes('-')) {
+                const [num1, num2] = expression.split('-').map(parseFloat);
+                result = num1 - num2;
+            }
+            else if (expression.includes('x')) {
+                const [num1, num2] = expression.split('x').map(parseFloat);
+                result = num1 * num2;
+            }
+            else if (expression.includes('÷')) {
+                const [num1, num2] = expression.split('÷').map(parseFloat);
+                result = num1 / num2;
+            }
+            else {
+                result = expression;
+            }
+            output.value = result;
+        }
+    </script>
+    <script type="text/javascript" src="vanilla-tilt.js"></script>
+    <script type="text/javascript">
+        VanillaTilt.init(document.querySelector(".card"), {
+            max: 25,
+            speed: 400
+        });
+    </script>
+</body>
+
+</html>
